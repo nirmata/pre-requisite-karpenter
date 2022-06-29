@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: karpenter-req-requisite-setup
+spec:
+  template:
+    metadata:
+      labels:
+        app: eks-aws-cli-run
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: eks-aws-cli
+        image: amazon/aws-cli:latest
+        env:
+          - name: CLUSTER_NAME
+            value: "eks-devtest"
+        command:
+          - /bin/sh
+          - -c
+          - |
+            yum install git -y > /dev/null 2>&1
+            git clone https://github.com/nirmata/pre-requisite-karpenter.git
+            cd pre-requisite-karpenter/karpenter-pre-req
+            chmod +x karpenter-preprequisite-script.sh
+            ./karpenter-preprequisite-script.sh $CLUSTER_NAME
+      restartPolicy: Never
