@@ -6,11 +6,8 @@ tagging-resources(){
     SECURITYGROUP_IDS=$(aws eks describe-cluster --name $CLUSTER_NAME --output text | grep SECURITYGROUPIDS | awk '{print $2}')
     CLUSTERSECURITYGROUP_IDS=$(aws eks describe-cluster --name $CLUSTER_NAME --output text | grep RESOURCESVPCCONFIG | awk '{print $2}')
 
-
     aws ec2 create-tags --resources $SUBNET_IDS --tags Key="karpenter.sh/discovery",Value=$CLUSTER_NAME
     echo "----- Subnet are tagged -----"
-
-
 
     aws ec2 create-tags --resources $SECURITYGROUP_IDS --tags Key="karpenter.sh/discovery",Value=$CLUSTER_NAME
     aws ec2 create-tags --resources $CLUSTERSECURITYGROUP_IDS --tags Key="karpenter.sh/discovery",Value=$CLUSTER_NAME
