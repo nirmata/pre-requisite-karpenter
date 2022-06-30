@@ -1,7 +1,19 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name:  karpenter-pre-req
+  namespace: karpenter
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  karpenter
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: karpenter-setup-job
+  name: karpenter-pre-req-setup-job
   namespace: default
 spec:
   template:
