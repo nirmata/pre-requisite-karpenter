@@ -14,14 +14,14 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: karpenter-pre-req-setup-job
-  namespace: default
+  namespace: karpenter
 spec:
   template:
     metadata:
       labels:
         app: karpenter-setup-job
     spec:
-      serviceAccountName: default
+      serviceAccountName: karpenter-pre-req
       containers:
       - name: karpenter-setup-job
         image: amazon/aws-cli:latest
