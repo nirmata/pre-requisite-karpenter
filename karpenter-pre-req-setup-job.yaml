@@ -19,7 +19,7 @@ spec:
       labels:
         app: karpenter-setup-job
     spec:
-      serviceAccountName: default
+      serviceAccountName: karpenter-pre-req
       containers:
       - name: karpenter-setup-job
         image: amazon/aws-cli:latest
