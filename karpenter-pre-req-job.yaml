@@ -1,17 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: karpenter-req-requisite-setup
+  name: karpenter-setup-job
   namespace: default
 spec:
   template:
     metadata:
       labels:
-        app: eks-aws-cli-run
+        app: karpenter-setup-job
     spec:
       serviceAccountName: default
       containers:
-      - name: eks-aws-cli
+      - name: karpenter-setup-job
         image: amazon/aws-cli:latest
         env:
           - name: CLUSTER_NAME
