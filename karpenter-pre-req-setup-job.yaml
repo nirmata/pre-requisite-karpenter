@@ -25,7 +25,7 @@ spec:
         image: amazon/aws-cli:latest
         env:
           - name: CLUSTER_NAME
-            value: "eks-devtest"
+            value: "eks-demo"
         command:
           - /bin/sh
           - -c
