@@ -57,7 +57,9 @@ Resources:
               - ec2:DescribeInstanceTypes
               - ec2:DescribeInstanceTypeOfferings
               - ec2:DescribeAvailabilityZones
+              - ec2:DescribeSpotPriceHistory
               - ssm:GetParameter
+              - pricing:GetProducts
 Outputs:
   KarpenterNodeInstanceProfile:
     Value: !Ref KarpenterNodeInstanceProfile
