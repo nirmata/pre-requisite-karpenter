@@ -25,7 +25,7 @@ spec:
         image: amazon/aws-cli:latest
         env:
           - name: CLUSTER_NAME
-            value: "eks-demo-bottlerocket-cluster-tezlkp"
+            value: "duke-karpenter-cluster-ilzujo"
         command:
           - /bin/sh
           - -c
