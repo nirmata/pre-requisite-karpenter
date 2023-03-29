@@ -1,16 +1,9 @@
 #!/bin/bash
 CLUSTER_NAME=$1
-
-tagging-resources(){
-    TAG_EKS=$(aws eks describe-cluster --name $CLUSTER_NAME --output text | grep arn | awk '{print $2}')
-    ACCOUNT_ID=$(aws eks describe-cluster --name $CLUSTER_NAME --output text | grep arn | awk '{print $2}' | cut -d ':' -f 5)
-    
-    aws eks tag-resource --resource-arn $TAG_EKS --tags Key="karpenter.sh/discovery",Value=$CLUSTER_NAME
-    echo "----- EKS Cluster is tagged -----"
-}
+ACCOUNT_ID=$2
 
 update-awsauth-cm(){
-    echo "Updating awsauth configmap"
+    echo "Updating awsauth configmap"  
     eksctl create iamidentitymapping \
       --username system:node:{{EC2PrivateDNSName}} \
       --cluster  ${CLUSTER_NAME} \
@@ -30,8 +23,8 @@ KarpenterController-IAM-Role(){
       --approve
 }    
 
-if [ -z "$CLUSTER_NAME" ]; then 
-  echo "Provide Cluster Name as argument"; 
+if [ $# -lt 2  ]; then 
+  echo "Provide Cluster Name and Account ID as arguments"; 
 else 
   update-awsauth-cm;
   KarpenterController-IAM-Role;
