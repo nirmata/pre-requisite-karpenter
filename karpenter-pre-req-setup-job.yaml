@@ -25,7 +25,7 @@ spec:
         image: amazon/aws-cli:latest
         env:
           - name: CLUSTER_NAME
-            value: "karpenter-test-1-23-cluster"
+            value: "karpenter-1-24-cluster"
         command:
           - /bin/sh
           - -c
